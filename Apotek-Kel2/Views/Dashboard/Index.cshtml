@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="section dashboard">
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="row">
+                <!-- Reports -->
+                <div class="col-12">
+                    <div class="card">
+
+
+                        <div class="card-body">
+                            <h5 class="card-title">Reports <span>/Year</span></h5>
+
+                            <!-- Line Chart -->
+                            <div id="reportsChart"></div>
+
+                            <script>
+                                document.addEventListener("DOMContentLoaded", () => {
+                                    new ApexCharts(document.querySelector("#reportsChart"), {
+                                        series: [{
+                                            name: 'Tersedia',
+                                            data: [31, 40, 28, 51, 42, 82, 56],
+                                        }, {
+                                            name: 'Dipinjam',
+                                            data: [11, 32, 45, 32, 34, 52, 41]
+                                        }, {
+                                            name: 'Rusak',
+                                            data: [2, 3, 3, 4, 5, 5, 5]
+                                        }],
+                                        chart: {
+                                            height: 350,
+                                            type: 'area',
+                                            toolbar: {
+                                                show: false
+                                            },
+                                        },
+                                        markers: {
+                                            size: 4
+                                        },
+                                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                        fill: {
+                                            type: "gradient",
+                                            gradient: {
+                                                shadeIntensity: 1,
+                                                opacityFrom: 0.3,
+                                                opacityTo: 0.4,
+                                                stops: [0, 90, 100]
+                                            }
+                                        },
+                                        dataLabels: {
+                                            enabled: false
+                                        },
+                                        stroke: {
+                                            curve: 'smooth',
+                                            width: 2
+                                        },
+                                        xaxis: {
+                                            categories: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli"]
+                                        },
+                                        tooltip: {
+                                            x: {
+
+                                            },
+                                        }
+                                    }).render();
+                                });
+                            </script>
+                            <!-- End Line Chart -->
+
+                        </div>
+
+                    </div>
+                </div><!-- End Reports -->
+
+            </div>
+        </div>
+    </div>
+</section>
+

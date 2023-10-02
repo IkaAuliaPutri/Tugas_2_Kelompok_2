@@ -1,0 +1,121 @@
+﻿@model List<Apotek_Kel2.Models.Jenis>
+
+@{
+    ViewData["Title"] = "Index";
+    int no = 1;
+}
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Master Jenis Obat</h5>
+                    <hr />
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="row">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="bi bi-check-circle me-1"></i>
+                                <strong>Sukses!</strong> @TempData["SuccessMessage"]
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    }
+
+                    <a class="btn btn-primary" asp-action="Create">Tambah Jenis Obat</a>
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">ID Jenis</th>
+                                <th scope="col">Nama Jenis</th>
+                                <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var jenis in Model)
+                            {
+                                <tr>
+                                    <td>@(no++)</td>
+                                    <td>@jenis.id</td>
+                                    <td>@jenis.namaJenis</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger delete-button" data-id="@jenis.id">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <a asp-controller="Jenis" asp-action="Edit" asp-route-id="@jenis.id" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button class="btn btn-sm btn-info btn-info-modal" data-toggle="modal" data-target="#infoModal_@jenis.id">
+                                            <i class="fas fa-info-circle"></i>
+                                        </button>
+
+                                        <div class="modal fade" id="infoModal_@jenis.id" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Informasi Jenis Buku</h5>
+                                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <strong>Id Jenis:</strong> @jenis.id<br />
+                                                        <strong>Nama Jenis:</strong> @jenis.namaJenis<br />
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        $(".delete-button").click(function () {
+            var jenisId = $(this).data("id");
+
+            swal({
+                title: "Hapus Jenis Obat?",
+                text: "Apakah Anda yakin ingin menghapus jenis obat ini?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    // Mengirimkan permintaan penghapusan ke controller
+                    $.ajax({
+                        url: "/Jenis/Delete/" + jenisId,
+                        type: "POST",
+                        success: function (data) {
+                            // Tampilkan pesan sukses jika diperlukan
+                            if (data.success) {
+                                swal("Sukses!", data.message, "success");
+                                // Refresh halaman setelah menghapus
+                                location.reload();
+                            } else {
+                                swal("Gagal!", data.message, "error");
+                            }
+                        },
+                        error: function () {
+                            swal("Error!", "Terjadi kesalahan saat menghapus jenis obat.", "error");
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+
