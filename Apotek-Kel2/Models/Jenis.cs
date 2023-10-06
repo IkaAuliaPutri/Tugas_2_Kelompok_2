@@ -8,5 +8,7 @@ namespace Apotek_Kel2.Models
 
         [Required(ErrorMessage = "Nama Judul wajib diisi.")]
         public String namaJenis { get; set; }
+
     }
+
 }

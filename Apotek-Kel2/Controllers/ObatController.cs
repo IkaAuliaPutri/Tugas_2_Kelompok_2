@@ -7,7 +7,7 @@ namespace Apotek_Kel2.Controllers
     {
         private static List<Obat> obats = InitializeData();
 
-        private static List<Obat> InitializeData()
+        public static List<Obat> InitializeData()
         {
             List<Obat> initialData = new List<Obat>
             {
@@ -15,9 +15,7 @@ namespace Apotek_Kel2.Controllers
                 {
                     id = "OBT001",
                     namaObat = "Parasetamol",
-                    merkObat = "apa",
                     id_jenis = "JNS001",
-                    deskripsiObat = "dffdfdf",
                     hargaObat = 1200,
                     stokObat = 15,
                     expObat ="2023-10-10"
@@ -26,9 +24,7 @@ namespace Apotek_Kel2.Controllers
                 {
                     id = "OBT002",
                     namaObat = "Sanmol",
-                    merkObat = "erer",
                     id_jenis = "JNS002",
-                    deskripsiObat = "efererer",
                     hargaObat = 1700,
                     stokObat = 10,
                     expObat = "2023-10-1"
@@ -39,8 +35,8 @@ namespace Apotek_Kel2.Controllers
 
         public IActionResult Index()
         {
-            List<Obat> bukuList = obats.ToList();
-            return View(bukuList);
+            List<Obat> obatList = obats.ToList();
+            return View(obatList);
         }
 
         [HttpGet]
@@ -127,9 +123,7 @@ namespace Apotek_Kel2.Controllers
                 }
 
                 newObat.namaObat = obat.namaObat;
-                newObat.merkObat = obat.merkObat;
                 newObat.id_jenis = obat.id_jenis;
-                newObat.deskripsiObat = obat.deskripsiObat;
                 newObat.hargaObat = obat.hargaObat;
                 newObat.stokObat = obat.stokObat;
                 newObat.expObat = obat.expObat;
@@ -140,5 +134,6 @@ namespace Apotek_Kel2.Controllers
 
             return View(obat);
         }
+        
     }
 }

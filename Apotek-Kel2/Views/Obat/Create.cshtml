@@ -1,5 +1,7 @@
 ﻿@model Apotek_Kel2.Models.Obat
 
+
+
 @{
     ViewData["Title"] = "Create";
 }
@@ -45,19 +47,9 @@
                                 <span asp-validation-for="namaObat" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="merkObat" class="control-label">Merk Obat</label>
-                                <input asp-for="merkObat" class="form-control" name="merkObat" />
-                                <span asp-validation-for="merkObat" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
                                 <label asp-for="id_jenis" class="control-label">Jenis Obat</label>
-                                <input asp-for="id_jenis" class="form-control" name="id_jenis" />
+                                <input asp-for="id_jenis" class="form-control" name="namaObat" />
                                 <span asp-validation-for="id_jenis" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="deskripsiObat" class="control-label">Deskripsi Obat</label>
-                                <input asp-for="deskripsiObat" class="form-control" name="deskripsiObat" />
-                                <span asp-validation-for="deskripsiObat" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="hargaObat" class="control-label">Harga Obat</label>
